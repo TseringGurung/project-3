@@ -133,7 +133,7 @@ Project 1: Create a book class.
         }
     }
 
-    bool Book::operator!=(const bool& right_side_not_equal){
+    bool Book::operator!=(const Book& right_side_not_equal){
         Book book1;
         if(book1 != right_side_not_equal){
             return true;
