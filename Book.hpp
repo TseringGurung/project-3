@@ -56,7 +56,7 @@ public:
     bool isDigital() const; 
 
     bool operator==(const Book& right_side_equal);
-    bool operator!=(const bool& right_side_not_equal);
+    bool operator!=(const Book& right_side_not_equal);
 
     void display();
 };
