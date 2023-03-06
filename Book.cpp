@@ -104,7 +104,16 @@ Project 1: Create a book class.
     - They must either be both digital or both not
     /*
     operator==
-    
+    */
+
+    bool Book::operator==(const Book& right_side_equal){
+        if(book_title == right_side_equal.book_title && book_author == right_side_equal.book_author && page_count == right_side_equal.page_count && digital == right_side_equal.digital){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
     /**
     @param     : A reference to the right hand side of the != operator.
@@ -113,35 +122,22 @@ Project 1: Create a book class.
     Note: ALL attributes must be equal for two books to be deemed equal.
     /*
     operator!=
+    */
 
+    bool Book::operator!=(const Book& right_side_not_equal){
+        if(book_title != right_side_not_equal.book_title || book_author != right_side_not_equal.book_author || page_count != right_side_not_equal.page_count || digital != right_side_not_equal.digital){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
 
     /**
     @post     : displays Book data in the form:
     "[title_] is written by [author_]. Page Count: [page_count_]. [It is / It is not] available digitally.\n"     
     */
-    
-
-
-    bool Book::operator==(const Book& right_side_equal){
-        Book book1;
-        if(book1 == right_side_equal){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    bool Book::operator!=(const Book& right_side_not_equal){
-        Book book1;
-        if(book1 != right_side_not_equal){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 
     void Book::display(){
         std::cout << book_title << " is written by " << book_author << ". Page Count: " << page_count << ". ";
