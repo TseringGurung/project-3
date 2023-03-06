@@ -135,3 +135,38 @@ int ArrayBag<ItemType>::getIndexOf(const ItemType& target) const
    return result;
 }  // end getIndexOf
 
+
+/**
+    @param:   A reference to another ArrayBag object
+    @post:    Combines the contents from both ArrayBag objects, including duplicates.
+    Example: [1, 2, 3] += [1, 4] will produce [1, 2, 3, 1, 4]
+*/
+template<class ItemType>
+void ArrayBag<ItemType>::operator+=(const ItemType& duplicate_bag){
+   std::vector <int> add;
+   for(int i = 0; i < duplicate_bag.item_count_; i++){
+      add.push_back(items_[i]);
+   }
+   for(int i = 0; i < duplicate_bag.item_count_; i++){
+      add.push_back(duplicate_bag[i]);
+   }
+}
+
+
+
+/** @param:   A reference to another ArrayBag object
+    @post:    Combines the contents from both ArrayBag objects, EXCLUDING duplicates.
+    Example: [1, 2, 3] += [1, 4] will produce [1, 2, 3, 4]
+*/
+template<class ItemType>
+void ArrayBag<ItemType>::operator/=(const ItemType& no_duplicate_bag){
+   std::vector <int> add;
+   for (int i = 0; i < no_duplicate_bag.item_count_; i++)
+    {
+        if (!contains(no_duplicate_bag.items_[i]))
+        {
+            add(no_duplicate_bag.items_[i]);
+        }
+    }
+}
+
