@@ -8,19 +8,19 @@
 class LibraryRecord : public ArrayBag<Book>{
     /*- A vector containing a copy of all the Books that have been checked out.*/
     private:
-    std::vector <Book> Book_copy;
+    std::vector<Book> Book_copy;
 
     public:
-    bool checkIn(Book& checkin_);
-    bool checkOut(Book& checkout_);
-    int getCheckOutHistory(Book& History_);
-    void display();
-    void displayTitles();
+    bool checkIn(const Book& checkin_);
+    bool checkOut(const Book& checkout_);
+    int getCheckOutHistory(const Book& History_) const;
+    void display() const;
+    void displayTitles() const;
     bool duplicateStock();
-    bool removeStock(Book& removestock_);
-    bool equivalentRecords(LibraryRecord& LibraryRecord_);
-    void operator+=(LibraryRecord& duplicate_add);
-    void operator/=(LibraryRecord& non_duplicate_add);
+    bool removeStock(const Book& removestock_);
+    bool equivalentRecords(const LibraryRecord& LibraryRecord_) const;
+    void operator+=(const LibraryRecord& duplicate_add);
+    void operator/=(const LibraryRecord& non_duplicate_add);
 };
 
 #endif
