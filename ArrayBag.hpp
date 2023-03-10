@@ -56,13 +56,13 @@ public:
     @post:    Combines the contents from both ArrayBag objects, including duplicates.
     Example: [1, 2, 3] += [1, 4] will produce [1, 2, 3, 1, 4]
    */
-   void operator+=(const ItemType& another_bag);
+   ArrayBag& operator+=(const ArrayBag<ItemType>& another_bag);
 
    /** @param:   A reference to another ArrayBag object
     @post:    Combines the contents from both ArrayBag objects, EXCLUDING duplicates.
     Example: [1, 2, 3] += [1, 4] will produce [1, 2, 3, 4]
    */
-   void operator/=(const ItemType& no_duplicate_bag);
+   ArrayBag& operator/=(const ArrayBag<ItemType>& no_duplicate_bag);
 
 
 protected:
@@ -78,6 +78,8 @@ protected:
   int getIndexOf(const ItemType& target) const;
 
 }; // end ArrayBag
+
+ArrayBag myBag;
 
 #include "ArrayBag.cpp"
 #endif
