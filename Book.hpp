@@ -1,12 +1,3 @@
-/*
-Name: Tsering Gurung
-Date: 02/09/2023
-Class: CS 235
-Professor: Tiziana Ligorio
-Assignment: Book.hpp
-Project 1: Create a book class.
-*/
-
 #ifndef BOOK_H
 #define BOOK_H
 #include <iostream>
