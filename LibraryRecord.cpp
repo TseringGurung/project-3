@@ -4,11 +4,13 @@
     @return:  returns true if a book was successfully added to items_, false otherwise
     @post:    adds book to items_.
  **/
-bool LibraryRecord::checkIn(Book& checkin_){
+bool LibraryRecord::checkIn(const Book& checkin_){
   if(add(checkin_)){
     return true;
   }
-  return false;
+  else{
+    return false;
+  }
 }
 
 
@@ -16,11 +18,14 @@ bool LibraryRecord::checkIn(Book& checkin_){
     @return:  returns true if a book was successfully removed from items_, false otherwise
     @post:    removes the book from the LibraryRecord and if remove was successful, it adds the book to the vector of checked-out books.
  **/
-bool LibraryRecord::checkOut(Book& checkout_){
+bool LibraryRecord::checkOut(const Book& checkout_){
   if(remove(checkout_)){
+    Book_copy.push_back(checkout_);
     return true;
   }
-  return false;
+  else{
+    return false;
+  }
 }
 
 
@@ -28,8 +33,13 @@ bool LibraryRecord::checkOut(Book& checkout_){
   @param:   A reference to a Book object
   @return:  The number of times (int) the referenced Book has been checked out
 */
-int LibraryRecord::getCheckOutHistory(Book& History_){
-  return getFrequencyOf(History_);
+int LibraryRecord::getCheckOutHistory(const Book& History_) const{
+  int total = 0;
+  for(int i = 0; i < Book_copy.size();i++){
+    if(Book_copy[i] == History_){
+      total++;
+    }
+  }
 }
 
 
@@ -40,19 +50,18 @@ int LibraryRecord::getCheckOutHistory(Book& History_){
              "[title_] is written by [author_]. Page Count: [page_count_]. [It is / It is not] available digitally.\n
              It has been checked out [_] times.\n"
   **/
-void LibraryRecord::display(){
-  for(int i = 0; i < getCurrentSize(); i++){
-    std::cout << book_title << " is written by " << book_author << ". Page Count: " << page_count << ". ";
-        if(digital){
-        std::cout << "It is available digitally.\n";
-        } 
-        else{
-        std::cout << "It is not available digitally.\n";
-        }
-  }
+void LibraryRecord::display() const{
+  for(int i = 0; i < Book_copy.size(); i++){
+    std::cout << Book_copy[i].getTitle() << " is written by " << Book_copy[i].getAuthor() << ". Page Count: " << Book_copy[i].getPageCount() << ". ";
+      if(Book_copy[i].isDigital()){
+      std::cout << "It is available digitally.\n";
+      } 
+      else{
+      std::cout << "It is not available digitally.\n";
+      }
+      std::cout << "It has been checked out " << getCheckOutHistory(items_[i]) << " times.\n";
+    }
 }
-
-
 
 
 /**
@@ -60,13 +69,16 @@ void LibraryRecord::display(){
   Example:
   "title1, title2, title3, title4!\n" Note the commas and exclamation mark.
 */
-void LibraryRecord::displayTitles(){
-  for(int i = 0; i < getCurrentSize(); i++){
-    std::cout << book_title[i];
+void LibraryRecord::displayTitles() const{
+  for(int i = 0; i < Book_copy.size(); i++){
+    std::cout << Book_copy[i].getTitle();
+        if (i < Book_copy.size() - 1) {
+            std::cout << ", ";
+        } else {
+            std::cout << "!\n";
+        }
   }
 }
-
-
 
 /**
   @return:    Returns true if the LibraryRecord was successfully duplicated, false otherwise (there is nothing to duplicate or duplicating would exceed DEFAULT_CAPACITY).
@@ -74,17 +86,27 @@ void LibraryRecord::displayTitles(){
   Example: we originally have [book1, book2] and after duplication we have [book1, book2, book1, book2]
 */
 bool LibraryRecord::duplicateStock(){
-  //copy array
+  if(Book_copy.size() * 2 > DEFAULT_CAPACITY){
+    return false;
+  }
+  for(int i = 0; i < Book_copy.size(); i++){
+    Book_copy.push_back(Book_copy[i]);
+  }
+  return true;
 }
-
 
 /**
   @param:   A reference to a book
   @return: True if at least one copy of the referenced book was removed from items_, false otherwise 
   @post: remove all occurrences of the referenced book
 */
-bool LibraryRecord::removeStock(Book& removestock_){
-
+bool LibraryRecord::removeStock(const Book& removestock_){
+  if(remove(removestock_)){
+    return true;
+  }
+  else{
+    return false;
+  }
 }
 
 
@@ -94,8 +116,12 @@ bool LibraryRecord::removeStock(Book& removestock_){
   and those of the referenced LibraryRecord are [book3, book1, book2], it will return true.
 
   However, [book1, book2, book2, book3] is not equivalent to [book1, book2, book3, book3], because it contains two copies of book2 and only one copy of book3*/
-bool LibraryRecord::equivalentRecords(LibraryRecord& LibraryRecord_){
+bool LibraryRecord::equivalentRecords(const LibraryRecord& LibraryRecord_) const{
+  if(item_count_ != LibraryRecord_.item_count_){
+    return false;
+  }
 
+  return true;
 }
 
 
@@ -109,14 +135,11 @@ bool LibraryRecord::equivalentRecords(LibraryRecord& LibraryRecord_){
     book4 is in LibraryRecord2 and has been checked out 2 times, then it should still be checked out 2 times in LibraryRecord1 after the += operation
     Hint: use getCheckOutHistory and the checkout history vector
 */
-void LibraryRecord::operator+=(LibraryRecord& duplicate_add){
-  std::vector <int> add;
-   for(int i = 0; i < duplicate_add.item_count_; i++){
-      add.push_back(items_[i]);
-   }
-   for(int i = 0; i < duplicate_add.item_count_; i++){
-      add.push_back(duplicate_add[i]);
-   }
+void LibraryRecord::operator+=(const LibraryRecord& duplicate_add){
+  for(int i = 0; i < duplicate_add.getCurrentSize(); i++){
+    add(duplicate_add.items_[i]);
+  }
+  Book_copy.insert(Book_copy.end(), duplicate_add.Book_copy.begin(), duplicate_add.Book_copy.end());
 }
 
 
@@ -129,13 +152,11 @@ void LibraryRecord::operator+=(LibraryRecord& duplicate_add){
     book4 is in LibraryRecord2 and has been checked out 2 times, then it should still be checked out 2 times in LibraryRecord1 after the /= operation
     Hint: use getCheckOutHistory and the checkout history vector
 */
-void LibraryRecord::operator/=(LibraryRecord& non_duplicate_add){
-  std::vector <int> add;
-   for (int i = 0; i < non_duplicate_add.item_count_; i++)
-    {
-        if (!contains(non_duplicate_add.items_[i]))
-        {
-            add(non_duplicate_add.items_[i]);
-        }
+void LibraryRecord::operator/=(const LibraryRecord& non_duplicate_add){
+  for(int i = 0; i < non_duplicate_add.getCurrentSize(); i++){
+    if(!contains(non_duplicate_add.items_[i])){
+      add(non_duplicate_add.items_[i]);
     }
+  }
+  Book_copy.insert(Book_copy.end(), non_duplicate_add.Book_copy.begin(), non_duplicate_add.Book_copy.end());
 }
