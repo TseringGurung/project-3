@@ -142,26 +142,19 @@ int ArrayBag<ItemType>::getIndexOf(const ItemType& target) const
     Example: [1, 2, 3] += [1, 4] will produce [1, 2, 3, 1, 4]
 */
 template<class ItemType>
-void ArrayBag<ItemType>::operator+=(const ItemType& duplicate_bag){
-   std::vector <int> add;
-   for(int i = 0; i < duplicate_bag.item_count_; i++){
-      add.push_back(items_[i]);
-   }
-   for(int i = 0; i < duplicate_bag.item_count_; i++){
-      add.push_back(duplicate_bag[i]);
+ArrayBag<ItemType>& ArrayBag<ItemType>::operator+=(const ArrayBag<ItemType>& duplicate_bag){ 
+   for(int i = 0; i < duplicate_bag.getCurrentSize(); i++){
+      add(duplicate_bag.items_[i]);
    }
 }
-
-
 
 /** @param:   A reference to another ArrayBag object
     @post:    Combines the contents from both ArrayBag objects, EXCLUDING duplicates.
     Example: [1, 2, 3] += [1, 4] will produce [1, 2, 3, 4]
 */
 template<class ItemType>
-void ArrayBag<ItemType>::operator/=(const ItemType& no_duplicate_bag){
-   std::vector <int> add;
-   for (int i = 0; i < no_duplicate_bag.item_count_; i++)
+ArrayBag<ItemType>& ArrayBag<ItemType>::operator/=(const ArrayBag<ItemType>& no_duplicate_bag){
+   for (int i = 0; i < no_duplicate_bag.getCurrentSize(); i++)
     {
         if (!contains(no_duplicate_bag.items_[i]))
         {
@@ -169,4 +162,3 @@ void ArrayBag<ItemType>::operator/=(const ItemType& no_duplicate_bag){
         }
     }
 }
-
