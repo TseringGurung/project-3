@@ -1,4 +1,13 @@
 /*
+Name: Tsering Gurung
+Date: 03/10/2023
+Class: CS 235
+Professor: Tiziana Ligorio
+Assignment: ArrayBag.hpp
+Project 3: Add two functions in ArrayBag.cpp.
+*/
+
+/*
 ArrayBag interface for term project
 CSCI 235 Spring 2023
 */
