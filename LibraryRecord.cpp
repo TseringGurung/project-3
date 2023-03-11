@@ -9,7 +9,10 @@ LibraryRecord::LibraryRecord(){}
     @post:    adds book to items_.
  **/
 bool LibraryRecord::checkIn(const Book& checkin_){
-   return add(checkin_);
+   if(add(checkin_)){
+    return true;
+  }
+  return false;
 }
 
 
@@ -68,10 +71,9 @@ void LibraryRecord::displayTitles() const{
         if (i < item_count_ - 1) {
             std::cout << ", ";
         } else {
-            std::cout << "!";
+            std::cout << "!\n";
         }
     }
-    std::cout << "\n";
 }
 
 /**
@@ -80,10 +82,7 @@ void LibraryRecord::displayTitles() const{
   Example: we originally have [book1, book2] and after duplication we have [book1, book2, book1, book2]
 */
 bool LibraryRecord::duplicateStock(){
-  if(item_count_ == 0){
-    return false;
-  }
-  if(item_count_ * 2 > DEFAULT_CAPACITY){
+  if(item_count_ * 2 > DEFAULT_CAPACITY && item_count_ == 0){
     return false;
   }
   int total = item_count_;
@@ -99,8 +98,9 @@ bool LibraryRecord::duplicateStock(){
   @post: remove all occurrences of the referenced book
 */
 bool LibraryRecord::removeStock(const Book& removestock_){
-  while(remove(removestock_));
-  return true;
+  while(remove(removestock_)){
+    return true;
+  }
 }
 
 
@@ -121,8 +121,6 @@ bool LibraryRecord::equivalentRecords(const LibraryRecord& LibraryRecord_) const
     }
   return true;
 }
-
-
 
 /**
     @param:   A reference to another LibraryRecord object
