@@ -11,85 +11,85 @@ Project 1: Create a book class.
 #include <string>
 #include "Book.hpp"
 
-    /*Deafault Constructor*/
-    Book::Book(){
-        book_title = "";
-        book_author = "";
-        page_count = 0;
-        digital = false;
-    }
+Book::Book(){}
 
-    /*Parameterized Constructor*/
-    Book::Book(const std::string Title,const std::string Author,const int PageCount,const bool Digital){
-        book_title = Title;
-        book_author = Author;
-        page_count = PageCount;
-        digital = Digital;
-    }
+/**
+  Parameterized constructor.
+  @param      : The title of the book (a string)
+  @param      : The author of the book (a string)
+  @param      : The number of pages in the book (a positive int)
+  @param      : A flag indicating whether the book is in digital form (a Boolean),
+                with default value False
+  @post       : The private members are set to the values of the corresponding parameters.
+*/
+Book::Book(std::string title, std::string author, int page_count, bool is_digital):
+						title_{title}, author_{author}, page_count_{page_count}, is_digital_{is_digital}{}
 
-    /**
-    @param  : the title of the Book
-    @post   : sets the Book's title to the value of the parameter
-    */
-    void Book::setTitle(const std::string Title){
-        this->book_title = Title;
-    }
+/**
+   @return : the title of the Book
+*/
+std::string Book::getTitle() const{
+	return title_;
+}
 
-    /**
-     @return : the title of the Book
-    */
-    std::string Book::getTitle() const{
-        return this->book_title;
-    }
+/**
+  @return : the author of the Book
+*/
+std::string Book::getAuthor() const{
+	return author_;
+}
 
-    /**
-    @param  : the name of the author of the Book
-    @post   : sets the Book's author to the value of the parameter
-    */
-    void Book::setAuthor(const std::string Author){
-        this->book_author = Author;
-    }
+/**
+  @return : the page count
+*/
+int Book::getPageCount() const{
+  return page_count_;
+}
 
-    /**
-      @return : the author of the Book
-    */
-    std::string Book::getAuthor() const{
-        return this->book_author;
-    }
+/**
+  @return : true if the book is available in digital form, false otherwise
 
-     /**
-    @param  : a positive integer page count
-    @pre    : page count > 0 - books cannot have a negative number of pages
-    @post   : sets the page count to the value of the parameter
-    */
-    void Book::setPageCount(const int PageCount){
-        if(PageCount > 0){
-            this->page_count = PageCount;
-        }
-    }
+  Note: this is an accessor function and must follow the same convention as all accessor functions even if it is not called getDigital
+*/
+bool Book::isDigital() const{
+	return is_digital_;
+}
 
-    /**
-      @return : the page count
-    */
-    int Book::getPageCount() const{
-        return this->page_count;
-    }
+/**
+  @param  : a reference to title of the Book
+  @post   : sets the Book's title to the value of the parameter
+*/
+void Book::setTitle(const std::string &title){
+	title_ = title;
+}
 
-    /**
-    @post   : sets the digital flag to true
-    */
-    void Book::setDigital(){
-        this->digital = true;
-    }
-    
-    /**
-    @return true if the book is available in digital form, false otherwise
+/**
+  @param  : a reference to the name of the author of the Book
+  @post   : sets the Book's author to the value of the parameter
+*/
+void Book::setAuthor(const std::string &author){
+	author_ = author;
+}
 
-    Note: this is an accessor function and must follow the same convention as all accessor functions even if it is not called getDigital
-    */
-    bool Book::isDigital() const{
-        return this->digital;
-    }
+/**
+  @param  : a reference to a positive integer page count
+  @pre    : page count > 0 - books cannot have a negative number of pages
+  @post   : sets the page count to the value of the parameter
+*/
+void Book::setPageCount(const int &page_count){
+  if (page_count > 0)
+  {
+    page_count_ = page_count;
+  }
+}
+
+/**
+  @post   : sets the digital flag to true
+*/
+void Book::setDigital(){
+  is_digital_ = true;
+}
+
 
      /**
     @param     : A reference to the right hand side of the == operator.
@@ -107,7 +107,7 @@ Project 1: Create a book class.
     */
 
     bool Book::operator==(const Book& right_side_equal) const{
-        if(book_title == right_side_equal.book_title && book_author == right_side_equal.book_author && page_count == right_side_equal.page_count && digital == right_side_equal.digital){
+        if(title_ == right_side_equal.title_ && author_ == right_side_equal.author_ && page_count_ == right_side_equal.page_count_ && is_digital_ == right_side_equal.is_digital_){
             return true;
         }
         else{
@@ -125,7 +125,7 @@ Project 1: Create a book class.
     */
 
     bool Book::operator!=(const Book& right_side_not_equal) const{
-        if(book_title != right_side_not_equal.book_title || book_author != right_side_not_equal.book_author || page_count != right_side_not_equal.page_count || digital != right_side_not_equal.digital){
+        if(title_ == right_side_not_equal.title_ ||author_ != right_side_not_equal.author_ || page_count_ != right_side_not_equal.page_count_ || is_digital_ != right_side_not_equal.is_digital_){
             return true;
         }
         else{
@@ -140,8 +140,8 @@ Project 1: Create a book class.
     */
 
     void Book::display() const{
-        std::cout << book_title << " is written by " << book_author << ". Page Count: " << page_count << ". ";
-        if(digital){
+        std::cout << title_ << " is written by " << author_ << ". Page Count: " << page_count_ << ". ";
+        if(is_digital_){
         std::cout << "It is available digitally.\n";
         } 
         else{
