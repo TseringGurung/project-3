@@ -1,4 +1,5 @@
 #include "LibraryRecord.hpp"
+#include <vector>
 #include "Book.hpp"
 
 LibraryRecord::LibraryRecord(){}
@@ -21,7 +22,7 @@ bool LibraryRecord::checkOut(const Book& checkout_){
     Book_copy.push_back(checkout_);
     return true;
   }
-    return false;
+  return false;
 }
 
 
@@ -31,7 +32,7 @@ bool LibraryRecord::checkOut(const Book& checkout_){
 */
 int LibraryRecord::getCheckOutHistory(const Book& History_) const{
   int total = 0;
-  for(int i = 0; i < Book_copy.size();i++){
+  for(int i = 0; i < Book_copy.size(); i++){
     if(Book_copy[i] == History_){
       total++;
     }
