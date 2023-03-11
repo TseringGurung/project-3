@@ -20,8 +20,8 @@ class LibraryRecord : public ArrayBag<Book>{
     bool duplicateStock();
     bool removeStock(const Book& removestock_);
     bool equivalentRecords(const LibraryRecord& LibraryRecord_) const;
-    void operator+=(const LibraryRecord& duplicate_add);
-    void operator/=(const LibraryRecord& non_duplicate_add);
+    LibraryRecord& operator+=(const LibraryRecord& duplicate_add);
+    LibraryRecord& operator/=(const LibraryRecord& non_duplicate_add);
 };
 
 #endif
