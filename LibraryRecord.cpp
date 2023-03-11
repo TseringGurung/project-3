@@ -9,7 +9,7 @@ LibraryRecord::LibraryRecord(){}
     @post:    adds book to items_.
  **/
 bool LibraryRecord::checkIn(const Book& checkin_){
-  return add(checkin_);
+   return add(checkin_);
 }
 
 
@@ -18,11 +18,12 @@ bool LibraryRecord::checkIn(const Book& checkin_){
     @post:    removes the book from the LibraryRecord and if remove was successful, it adds the book to the vector of checked-out books.
  **/
 bool LibraryRecord::checkOut(const Book& checkout_){
-  if(remove(checkout_)){
-    Book_copy.push_back(checkout_);
-    return true;
-  }
-  return false;
+    if (remove(checkout_))
+    {
+        Book_copy.push_back(checkout_);
+        return true;
+    } 
+    return false;
 }
 
 
@@ -85,7 +86,8 @@ bool LibraryRecord::duplicateStock(){
   if(item_count_ * 2 > DEFAULT_CAPACITY){
     return false;
   }
-  for(int i = 0; i < item_count_; i++){
+  int total = item_count_;
+  for(int i = 0; i < total; i++){
     add(items_[i]);
   }
   return true;
