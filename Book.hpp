@@ -18,7 +18,7 @@ class Book{
       	Default constructor.
       	Default-initializes all private members. Booleans are default-initialized to False.
    		*/
-		Book()=default;
+		Book();
 
 		/**
 		 Parameterized constructor.
@@ -79,11 +79,11 @@ class Book{
 		*/
 		void setDigital();
 
-    bool operator==(const Book& right_side_equal) const;
-    bool operator!=(const Book& right_side_not_equal) const;
+    bool operator==(const Book &right_side_equal) const;
+    bool operator!=(const Book &right_side_not_equal) const;
 
     void display() const;
-    
+
 	private:
 	std::string title_; // The title of the book (a string)
     std::string author_; // The author of the book (a string)
