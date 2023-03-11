@@ -1,12 +1,3 @@
-/*
-Name: Tsering Gurung
-Date: 02/09/2023
-Class: CS 235
-Professor: Tiziana Ligorio
-Assignment: Book.cpp
-Project 1: Create a book class.
-*/
-
 #include <iostream>
 #include <string>
 #include "Book.hpp"
@@ -33,14 +24,14 @@ Project 1: Create a book class.
     */
     void Book::setTitle(const std::string Title){
         this->book_title = Title;
-    };
+    }
 
     /**
      @return : the title of the Book
     */
     std::string Book::getTitle() const{
         return this->book_title;
-    };
+    }
 
     /**
     @param  : the name of the author of the Book
@@ -48,14 +39,14 @@ Project 1: Create a book class.
     */
     void Book::setAuthor(const std::string Author){
         this->book_author = Author;
-    };
+    }
 
     /**
       @return : the author of the Book
     */
     std::string Book::getAuthor() const{
         return this->book_author;
-    };
+    }
 
      /**
     @param  : a positive integer page count
@@ -66,21 +57,21 @@ Project 1: Create a book class.
         if(PageCount > 0){
             this->page_count = PageCount;
         }
-    };
+    }
 
     /**
       @return : the page count
     */
     int Book::getPageCount() const{
         return this->page_count;
-    };
+    }
 
     /**
     @post   : sets the digital flag to true
     */
     void Book::setDigital(){
         this->digital = true;
-    };
+    }
     
     /**
     @return true if the book is available in digital form, false otherwise
@@ -89,7 +80,7 @@ Project 1: Create a book class.
     */
     bool Book::isDigital() const{
         return this->digital;
-    }; 
+    }
 
      /**
     @param     : A reference to the right hand side of the == operator.
@@ -139,7 +130,7 @@ Project 1: Create a book class.
     "[title_] is written by [author_]. Page Count: [page_count_]. [It is / It is not] available digitally.\n"     
     */
 
-    void Book::display(){
+    void Book::display() const{
         std::cout << book_title << " is written by " << book_author << ". Page Count: " << page_count << ". ";
         if(digital){
         std::cout << "It is available digitally.\n";
