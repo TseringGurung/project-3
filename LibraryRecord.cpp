@@ -1,5 +1,7 @@
 #include "LibraryRecord.hpp"
 
+LibraryRecord::LibraryRecord(){}
+
 /** @param:   A reference to a Book object to be checked in
     @return:  returns true if a book was successfully added to items_, false otherwise
     @post:    adds book to items_.
@@ -40,6 +42,7 @@ int LibraryRecord::getCheckOutHistory(const Book& History_) const{
       total++;
     }
   }
+  return total;
 }
 
 
@@ -51,9 +54,9 @@ int LibraryRecord::getCheckOutHistory(const Book& History_) const{
              It has been checked out [_] times.\n"
   **/
 void LibraryRecord::display() const{
-  for(int i = 0; i < Book_copy.size(); i++){
-    std::cout << Book_copy[i].getTitle() << " is written by " << Book_copy[i].getAuthor() << ". Page Count: " << Book_copy[i].getPageCount() << ". ";
-      if(Book_copy[i].isDigital()){
+  for(int i = 0; i < item_count_; i++){
+    std::cout << items_[i].getTitle() << " is written by " << items_[i].getAuthor() << ". Page Count: " << items_[i].getPageCount() << ". ";
+      if(items_[i].isDigital()){
       std::cout << "It is available digitally.\n";
       } 
       else{
@@ -70,9 +73,9 @@ void LibraryRecord::display() const{
   "title1, title2, title3, title4!\n" Note the commas and exclamation mark.
 */
 void LibraryRecord::displayTitles() const{
-  for(int i = 0; i < Book_copy.size(); i++){
-    std::cout << Book_copy[i].getTitle();
-        if (i < Book_copy.size() - 1) {
+  for(int i = 0; i < item_count_; i++){
+    std::cout << items_[i].getTitle();
+        if (i < item_count_ - 1) {
             std::cout << ", ";
         } else {
             std::cout << "!\n";
@@ -86,11 +89,11 @@ void LibraryRecord::displayTitles() const{
   Example: we originally have [book1, book2] and after duplication we have [book1, book2, book1, book2]
 */
 bool LibraryRecord::duplicateStock(){
-  if(Book_copy.size() * 2 > DEFAULT_CAPACITY){
+  if(item_count_ * 2 > DEFAULT_CAPACITY && item_count_ == 0){
     return false;
   }
-  for(int i = 0; i < Book_copy.size(); i++){
-    Book_copy.push_back(Book_copy[i]);
+  for(int i = 0; i < item_count_; i++){
+    add(items_[i]);
   }
   return true;
 }
@@ -120,7 +123,11 @@ bool LibraryRecord::equivalentRecords(const LibraryRecord& LibraryRecord_) const
   if(item_count_ != LibraryRecord_.item_count_){
     return false;
   }
-
+  for(Book i : items_) {
+        if(getFrequencyOf(i) != LibraryRecord_.getFrequencyOf(i)) {
+            return false;
+        }
+    }
   return true;
 }
 
