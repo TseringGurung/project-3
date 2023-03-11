@@ -79,16 +79,16 @@ class Book{
 		*/
 		void setDigital();
 
+    bool operator==(const Book& right_side_equal) const;
+    bool operator!=(const Book& right_side_not_equal) const;
+
+    void display() const;
+    
 	private:
 	std::string title_; // The title of the book (a string)
     std::string author_; // The author of the book (a string)
     int page_count_; // The page count (an integer)
     bool is_digital_; // A flag indicating whether the book is available in digital form (a Boolean)
-
-    bool operator==(const Book& right_side_equal) const;
-    bool operator!=(const Book& right_side_not_equal) const;
-
-    void display() const;
 };
 
 #endif
