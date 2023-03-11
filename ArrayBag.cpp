@@ -104,6 +104,36 @@ bool ArrayBag<ItemType>::contains(const ItemType& an_entry) const
 	return getIndexOf(an_entry) > -1;
 }  // end contains
 
+/**
+    @param:   A reference to another ArrayBag object
+    @post:    Combines the contents from both ArrayBag objects, including duplicates.
+    Example: [1, 2, 3] += [1, 4] will produce [1, 2, 3, 1, 4]
+*/
+template<class ItemType>
+ArrayBag<ItemType>& ArrayBag<ItemType>::operator+=(const ArrayBag<ItemType>& duplicate_bag){ 
+   for(int i = 0; i < duplicate_bag.getCurrentSize(); i++){
+      add(duplicate_bag.items_[i]);
+   }
+   return *this;
+}
+
+/** @param:   A reference to another ArrayBag object
+    @post:    Combines the contents from both ArrayBag objects, EXCLUDING duplicates.
+    Example: [1, 2, 3] += [1, 4] will produce [1, 2, 3, 4]
+*/
+template<class ItemType>
+ArrayBag<ItemType>& ArrayBag<ItemType>::operator/=(const ArrayBag<ItemType>& no_duplicate_bag){
+   ArrayBag<ItemType> *bag = new ArrayBag<ItemType>();
+   for (int i = 0; i < no_duplicate_bag.getCurrentSize(); i++)
+    {
+        if (!contains(no_duplicate_bag.items_[i]))
+        {
+            bag->add(no_duplicate_bag.items_[i]);
+        }
+    }
+    return *this;
+}
+
 // ********* PRIVATE METHODS **************//
 
 /**
@@ -134,34 +164,3 @@ int ArrayBag<ItemType>::getIndexOf(const ItemType& target) const
 
    return result;
 }  // end getIndexOf
-
-
-/**
-    @param:   A reference to another ArrayBag object
-    @post:    Combines the contents from both ArrayBag objects, including duplicates.
-    Example: [1, 2, 3] += [1, 4] will produce [1, 2, 3, 1, 4]
-*/
-template<class ItemType>
-ArrayBag<ItemType>& ArrayBag<ItemType>::operator+=(const ArrayBag<ItemType>& duplicate_bag){ 
-   for(int i = 0; i < duplicate_bag.getCurrentSize(); i++){
-      add(duplicate_bag.items_[i]);
-   }
-   return *this;
-}
-
-/** @param:   A reference to another ArrayBag object
-    @post:    Combines the contents from both ArrayBag objects, EXCLUDING duplicates.
-    Example: [1, 2, 3] += [1, 4] will produce [1, 2, 3, 4]
-*/
-template<class ItemType>
-ArrayBag<ItemType>& ArrayBag<ItemType>::operator/=(const ArrayBag<ItemType>& no_duplicate_bag){
-   ArrayBag<ItemType> *bag = new ArrayBag<ItemType>();
-   for (int i = 0; i < no_duplicate_bag.getCurrentSize(); i++)
-    {
-        if (!contains(no_duplicate_bag.items_[i]))
-        {
-            bag->add(no_duplicate_bag.items_[i]);
-        }
-    }
-    return *this;
-}
