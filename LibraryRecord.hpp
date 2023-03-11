@@ -11,6 +11,7 @@ class LibraryRecord : public ArrayBag<Book>{
     std::vector<Book> Book_copy;
 
     public:
+    LibraryRecord();
     bool checkIn(const Book& checkin_);
     bool checkOut(const Book& checkout_);
     int getCheckOutHistory(const Book& History_) const;
