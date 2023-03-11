@@ -79,7 +79,5 @@ protected:
 
 }; // end ArrayBag
 
-ArrayBag myBag;
-
 #include "ArrayBag.cpp"
 #endif
