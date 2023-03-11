@@ -79,7 +79,10 @@ void LibraryRecord::displayTitles() const{
   Example: we originally have [book1, book2] and after duplication we have [book1, book2, book1, book2]
 */
 bool LibraryRecord::duplicateStock(){
-  if(item_count_ * 2 > DEFAULT_CAPACITY && item_count_ == 0){
+  if(item_count_ == 0){
+    return false;
+  }
+  if(item_count_ * 2 > DEFAULT_CAPACITY){
     return false;
   }
   for(int i = 0; i < item_count_; i++){
@@ -129,7 +132,7 @@ bool LibraryRecord::equivalentRecords(const LibraryRecord& LibraryRecord_) const
     Hint: use getCheckOutHistory and the checkout history vector
 */
 LibraryRecord& LibraryRecord::operator+=(const LibraryRecord& duplicate_add){
-  for(int i = 0; i < duplicate_add.getCurrentSize(); i++){
+  for(int i = 0; i < duplicate_add.item_count_; i++){
     add(duplicate_add.items_[i]);
   }
   Book_copy.insert(Book_copy.end(), duplicate_add.Book_copy.begin(), duplicate_add.Book_copy.end());
@@ -147,7 +150,7 @@ LibraryRecord& LibraryRecord::operator+=(const LibraryRecord& duplicate_add){
     Hint: use getCheckOutHistory and the checkout history vector
 */
 LibraryRecord& LibraryRecord::operator/=(const LibraryRecord& non_duplicate_add){
-  for(int i = 0; i < non_duplicate_add.getCurrentSize(); i++){
+  for(int i = 0; i < non_duplicate_add.item_count_; i++){
     if(!contains(non_duplicate_add.items_[i])){
       add(non_duplicate_add.items_[i]);
     }
