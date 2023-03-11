@@ -1,50 +1,89 @@
+/*
+Name: Tsering Gurung
+Date: 02/09/2023
+Class: CS 235
+Professor: Tiziana Ligorio
+Assignment: Book.hpp
+Project 1: Create a book class.
+*/
+
 #ifndef BOOK_H
 #define BOOK_H
 #include <iostream>
 #include <string>
 
 class Book{
-/*
-private:
-	- The title of the book (a string)
-	- The author of the book (a string)
-	- The page count (an integer)
-	- A flag indicating whether the book is available in digital form (a Boolean)
-*/
-private:
-    std::string book_title;
-    std::string book_author;
-    int page_count;
-    bool digital;
-public:
-    /**
-      Default constructor.
-      Default-initializes all private members. Booleans are default-initialized to False.
-   */
-   /**
-      Parameterized constructor.
-      @param      : The title of the book (a string)
-      @param      : The author of the book (a string)
-      @param      : The number of pages in the book (a positive int)
-      @param      : A flag indicating whether the book is in digital form (a Boolean),
-                    with default value False
-      @post       : The private members are set to the values of the corresponding parameters.
-    */
+	public:
+		 /**
+      	Default constructor.
+      	Default-initializes all private members. Booleans are default-initialized to False.
+   		*/
+		Book()=default;
 
-    Book();
-    Book(const std::string Title,const std::string Author,const int PageCount,const bool Digital = false);
+		/**
+		 Parameterized constructor.
+		@param      : The title of the book (a string)
+		@param      : The author of the book (a string)
+		@param      : The number of pages in the book (a positive int)
+		@param      : A flag indicating whether the book is in digital form (a Boolean),
+						with default value False
+		@post       : The private members are set to the values of the corresponding parameters.
+		*/
+		Book(std::string title, std::string author, int page_count, bool is_digital_ = false);
 
-    void setTitle(const std::string Title);
-    std::string getTitle() const;
-    
-    void setAuthor(const std::string Author);
-    std::string getAuthor() const;
-   
-    void setPageCount(const int PageCount);
-    int getPageCount() const;
+		/**
+			 @return : the title of the Book
+		*/
+		std::string getTitle() const;  //returns title of book
 
-    void setDigital();
-    bool isDigital() const; 
+		/**
+			 @return : the author of the Book
+		*/
+		std::string getAuthor() const;  //returns author of book
+
+		/**
+			 @return : the page count
+		*/
+		int getPageCount() const;  //returns page count of book
+
+		/**
+			@return : true if the book is available in digital form, false otherwise
+
+			Note: this is an accessor function and must follow the same convention as
+			all accessor functions even if it is not called getDigital
+		*/
+		bool isDigital() const;  //returns true if book is digital
+
+		/**
+		 	@param  : a reference to title of the Book
+			@post   : sets the Book's title to the value of the parameter
+		*/
+		void setTitle(const std::string &title);
+
+		/**
+			@param  : a reference to the name of the author of the Book
+			@post   : sets the Book's author to the value of the parameter
+		*/
+		void setAuthor(const std::string &author);
+
+
+		/**
+			@param  : a reference to a positive integer page count
+			@pre    : page count > 0 - books cannot have a negative number of pages
+			@post   : sets the page count to the value of the parameter
+		*/
+    	void setPageCount(const int &page_count);
+
+		/**
+		 @post   : sets the digital flag to true
+		*/
+		void setDigital();
+
+	private:
+	std::string title_; // The title of the book (a string)
+    std::string author_; // The author of the book (a string)
+    int page_count_; // The page count (an integer)
+    bool is_digital_; // A flag indicating whether the book is available in digital form (a Boolean)
 
     bool operator==(const Book& right_side_equal) const;
     bool operator!=(const Book& right_side_not_equal) const;
