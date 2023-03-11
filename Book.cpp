@@ -11,7 +11,12 @@ Project 1: Create a book class.
 #include <string>
 #include "Book.hpp"
 
-Book::Book(){}
+Book::Book(){
+    title_="";
+    author_="";
+    page_count_=0;
+    is_digital_=false;
+}
 
 /**
   Parameterized constructor.
@@ -106,7 +111,17 @@ void Book::setDigital(){
     operator==
     */
 
-    bool Book::operator==(const Book& right_side_equal) const{
+void Book::display() const{
+        std::cout << title_ << " is written by " << author_ << ". Page Count: " << page_count_ << ". ";
+        if(is_digital_){
+        std::cout << "It is available digitally.\n";
+        } 
+        else{
+        std::cout << "It is not available digitally.\n";
+        }
+    }
+    
+    bool Book::operator==(const Book &right_side_equal) const{
         if(title_ == right_side_equal.title_ && author_ == right_side_equal.author_ && page_count_ == right_side_equal.page_count_ && is_digital_ == right_side_equal.is_digital_){
             return true;
         }
@@ -124,7 +139,7 @@ void Book::setDigital(){
     operator!=
     */
 
-    bool Book::operator!=(const Book& right_side_not_equal) const{
+    bool Book::operator!=(const Book &right_side_not_equal) const{
         if(title_ == right_side_not_equal.title_ ||author_ != right_side_not_equal.author_ || page_count_ != right_side_not_equal.page_count_ || is_digital_ != right_side_not_equal.is_digital_){
             return true;
         }
@@ -138,14 +153,3 @@ void Book::setDigital(){
     @post     : displays Book data in the form:
     "[title_] is written by [author_]. Page Count: [page_count_]. [It is / It is not] available digitally.\n"     
     */
-
-    void Book::display() const{
-        std::cout << title_ << " is written by " << author_ << ". Page Count: " << page_count_ << ". ";
-        if(is_digital_){
-        std::cout << "It is available digitally.\n";
-        } 
-        else{
-        std::cout << "It is not available digitally.\n";
-        }
-    }
-    
