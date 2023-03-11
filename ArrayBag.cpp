@@ -1,4 +1,13 @@
 /*
+Name: Tsering Gurung
+Date: 03/10/2023
+Class: CS 235
+Professor: Tiziana Ligorio
+Assignment: ArrayBag.cpp
+Project 3: Add two functions in ArrayBag.cpp.
+*/
+
+/*
 ArrayBag implementation for term project
 CSCI 235 Spring 2023
 */
@@ -98,6 +107,7 @@ int ArrayBag<ItemType>::getFrequencyOf(const ItemType& an_entry) const
 /**
  @return true if an_etry is found in items_, false otherwise
  **/
+
 template<class ItemType>
 bool ArrayBag<ItemType>::contains(const ItemType& an_entry) const
 {
@@ -114,7 +124,6 @@ ArrayBag<ItemType>& ArrayBag<ItemType>::operator+=(const ArrayBag<ItemType>& dup
    for(int i = 0; i < duplicate_bag.getCurrentSize(); i++){
       add(duplicate_bag.items_[i]);
    }
-   
 }
 
 /** @param:   A reference to another ArrayBag object
@@ -123,15 +132,12 @@ ArrayBag<ItemType>& ArrayBag<ItemType>::operator+=(const ArrayBag<ItemType>& dup
 */
 template<class ItemType>
 ArrayBag<ItemType>& ArrayBag<ItemType>::operator/=(const ArrayBag<ItemType>& no_duplicate_bag){
-   
-   for (int i = 0; i < no_duplicate_bag.getCurrentSize(); i++)
-    {
+   for (int i = 0; i < no_duplicate_bag.getCurrentSize(); i++){
         if (!contains(no_duplicate_bag.items_[i]))
         {
-            add(no_duplicate_bag.items_[i]);
+           add(no_duplicate_bag.items_[i]);
         }
     }
-    
 }
 
 // ********* PRIVATE METHODS **************//
