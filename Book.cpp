@@ -1,3 +1,12 @@
+/*
+Name: Tsering Gurung
+Date: 02/09/2023
+Class: CS 235
+Professor: Tiziana Ligorio
+Assignment: Book.cpp
+Project 1: Create a book class.
+*/
+
 #include <iostream>
 #include <string>
 #include "Book.hpp"
@@ -97,7 +106,7 @@
     operator==
     */
 
-    bool Book::operator==(const Book& right_side_equal){
+    bool Book::operator==(const Book& right_side_equal) const{
         if(book_title == right_side_equal.book_title && book_author == right_side_equal.book_author && page_count == right_side_equal.page_count && digital == right_side_equal.digital){
             return true;
         }
@@ -115,7 +124,7 @@
     operator!=
     */
 
-    bool Book::operator!=(const Book& right_side_not_equal){
+    bool Book::operator!=(const Book& right_side_not_equal) const{
         if(book_title != right_side_not_equal.book_title || book_author != right_side_not_equal.book_author || page_count != right_side_not_equal.page_count || digital != right_side_not_equal.digital){
             return true;
         }
