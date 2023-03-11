@@ -1,4 +1,5 @@
 #include "LibraryRecord.hpp"
+#include "Book.hpp"
 
 LibraryRecord::LibraryRecord(){}
 
@@ -7,12 +8,7 @@ LibraryRecord::LibraryRecord(){}
     @post:    adds book to items_.
  **/
 bool LibraryRecord::checkIn(const Book& checkin_){
-  if(add(checkin_)){
-    return true;
-  }
-  else{
-    return false;
-  }
+  return add(checkin_);
 }
 
 
@@ -25,9 +21,7 @@ bool LibraryRecord::checkOut(const Book& checkout_){
     Book_copy.push_back(checkout_);
     return true;
   }
-  else{
     return false;
-  }
 }
 
 
@@ -55,15 +49,9 @@ int LibraryRecord::getCheckOutHistory(const Book& History_) const{
   **/
 void LibraryRecord::display() const{
   for(int i = 0; i < item_count_; i++){
-    std::cout << items_[i].getTitle() << " is written by " << items_[i].getAuthor() << ". Page Count: " << items_[i].getPageCount() << ". ";
-      if(items_[i].isDigital()){
-      std::cout << "It is available digitally.\n";
-      } 
-      else{
-      std::cout << "It is not available digitally.\n";
-      }
-      std::cout << "It has been checked out " << getCheckOutHistory(items_[i]) << " times.\n";
-    }
+    items_[i].display();
+    std::cout << "It has been checked out " << getCheckOutHistory(items_[i]) << " times.\n";
+  }
 }
 
 
@@ -78,9 +66,10 @@ void LibraryRecord::displayTitles() const{
         if (i < item_count_ - 1) {
             std::cout << ", ";
         } else {
-            std::cout << "!\n";
+            std::cout << "!";
         }
-  }
+    }
+    std::cout << "\n";
 }
 
 /**
@@ -104,12 +93,8 @@ bool LibraryRecord::duplicateStock(){
   @post: remove all occurrences of the referenced book
 */
 bool LibraryRecord::removeStock(const Book& removestock_){
-  if(remove(removestock_)){
-    return true;
-  }
-  else{
-    return false;
-  }
+  while(remove(removestock_));
+  return true;
 }
 
 
