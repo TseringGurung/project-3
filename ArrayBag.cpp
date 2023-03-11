@@ -146,6 +146,7 @@ ArrayBag<ItemType>& ArrayBag<ItemType>::operator+=(const ArrayBag<ItemType>& dup
    for(int i = 0; i < duplicate_bag.getCurrentSize(); i++){
       add(duplicate_bag.items_[i]);
    }
+   return *this;
 }
 
 /** @param:   A reference to another ArrayBag object
@@ -154,11 +155,13 @@ ArrayBag<ItemType>& ArrayBag<ItemType>::operator+=(const ArrayBag<ItemType>& dup
 */
 template<class ItemType>
 ArrayBag<ItemType>& ArrayBag<ItemType>::operator/=(const ArrayBag<ItemType>& no_duplicate_bag){
+   ArrayBag<ItemType> *bag = new ArrayBag<ItemType>();
    for (int i = 0; i < no_duplicate_bag.getCurrentSize(); i++)
     {
         if (!contains(no_duplicate_bag.items_[i]))
         {
-            add(no_duplicate_bag.items_[i]);
+            bag->add(no_duplicate_bag.items_[i]);
         }
     }
+    return *this;
 }
