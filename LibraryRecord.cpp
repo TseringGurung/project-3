@@ -1,3 +1,12 @@
+/*
+Name: Tsering Gurung
+Date: 03/10/2023
+Class: CS 235
+Professor: Tiziana Ligorio
+Assignment: LibraryRecord.cpp
+Project 3: Create a subclass of the ArrayBag.
+*/
+
 #include "LibraryRecord.hpp"
 #include <vector>
 #include "Book.hpp"
@@ -21,8 +30,7 @@ bool LibraryRecord::checkIn(const Book& checkin_){
     @post:    removes the book from the LibraryRecord and if remove was successful, it adds the book to the vector of checked-out books.
  **/
 bool LibraryRecord::checkOut(const Book& checkout_){
-    if (remove(checkout_))
-    {
+    if (remove(checkout_)){
         Book_copy.push_back(checkout_);
         return true;
     } 
