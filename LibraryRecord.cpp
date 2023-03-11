@@ -127,11 +127,12 @@ bool LibraryRecord::equivalentRecords(const LibraryRecord& LibraryRecord_) const
     book4 is in LibraryRecord2 and has been checked out 2 times, then it should still be checked out 2 times in LibraryRecord1 after the += operation
     Hint: use getCheckOutHistory and the checkout history vector
 */
-void LibraryRecord::operator+=(const LibraryRecord& duplicate_add){
+LibraryRecord& LibraryRecord::operator+=(const LibraryRecord& duplicate_add){
   for(int i = 0; i < duplicate_add.getCurrentSize(); i++){
     add(duplicate_add.items_[i]);
   }
   Book_copy.insert(Book_copy.end(), duplicate_add.Book_copy.begin(), duplicate_add.Book_copy.end());
+  return *this;
 }
 
 
@@ -144,11 +145,12 @@ void LibraryRecord::operator+=(const LibraryRecord& duplicate_add){
     book4 is in LibraryRecord2 and has been checked out 2 times, then it should still be checked out 2 times in LibraryRecord1 after the /= operation
     Hint: use getCheckOutHistory and the checkout history vector
 */
-void LibraryRecord::operator/=(const LibraryRecord& non_duplicate_add){
+LibraryRecord& LibraryRecord::operator/=(const LibraryRecord& non_duplicate_add){
   for(int i = 0; i < non_duplicate_add.getCurrentSize(); i++){
     if(!contains(non_duplicate_add.items_[i])){
       add(non_duplicate_add.items_[i]);
     }
   }
   Book_copy.insert(Book_copy.end(), non_duplicate_add.Book_copy.begin(), non_duplicate_add.Book_copy.end());
+  return *this;
 }
