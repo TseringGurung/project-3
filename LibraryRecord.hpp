@@ -1,3 +1,12 @@
+/*
+Name: Tsering Gurung
+Date: 03/10/2023
+Class: CS 235
+Professor: Tiziana Ligorio
+Assignment: LibraryRecord.hpp
+Project 3: Create a subclass of the ArrayBag.
+*/
+
 #ifndef LIBRARYRECORD_HPP_
 #define LIBRARYRECORD_HPP_
 
